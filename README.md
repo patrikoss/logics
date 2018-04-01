@@ -1,2 +1,2 @@
-# logic-turing-machine
-Solving Turing Machine word acceptance problem with SAT-solver.
+# logic
+Some problems connected to logics and their corresponding solutions.
