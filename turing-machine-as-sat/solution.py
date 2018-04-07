@@ -250,9 +250,20 @@ class TMAcceptanceSAT():
                                     Y(step+1, pos+direction).bool(),
                                     Z(step+1, pos, dstChar).bool(),
                                 ]),
+                        # there is at least 1 valid transition - choose one
                         if len(consequent) > 0:
                             consequent = Or(consequent)
-                            formulas += Implies(antecedent, consequent),
+                        # if we reach a final state we can do identity transition
+                        elif state==self.acceptingState:
+                            consequent = And([
+                                X(step+1, state).bool(),
+                                Y(step+1, pos).bool(),
+                                Z(step+1, pos, char).bool(),
+                            ])
+                        # in other cases the machine fails to accept the word
+                        else:
+                            consequent = False
+                        formulas += Implies(antecedent, consequent),
         return [And(formulas)]
 
     def _formulasReachAcceptingState(self):
