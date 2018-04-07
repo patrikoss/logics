@@ -71,6 +71,7 @@ class TMAcceptanceSAT():
         self.initState = initState
         self.acceptingState = acceptingState
         self.word = word
+        self.maxSteps = len(word) + 1
 
     def generateSAT(self):
         """
@@ -117,7 +118,7 @@ class TMAcceptanceSAT():
         stateHistory = []
         headPositionHistory = []
         tapeHistory = []
-        for step in range(len(self.word)):
+        for step in range(self.maxSteps):
             # find the state at given step
             for state in self.states:
                 if valuation[str(X(step, state))]:
@@ -159,7 +160,7 @@ class TMAcceptanceSAT():
         For every point in time, the machine is in at most 1 state
         """
         formulas = []
-        for step in range(len(self.word)):
+        for step in range(self.maxSteps):
             for q1 in range(len(self.states)):
                 for q2 in range(q1+1, len(self.states)):
                     formulas += Not(
@@ -176,7 +177,7 @@ class TMAcceptanceSAT():
         For every point in time, the machine head is in at most 1 position
         """
         formulas = []
-        for step in range(len(self.word)):
+        for step in range(self.maxSteps):
             for pos1 in range(len(self.word)):
                 for pos2 in range(pos1+1, len(self.word)):
                     formulas += Not(
@@ -194,7 +195,7 @@ class TMAcceptanceSAT():
         in this cell
         """
         formulas = []
-        for step in range(len(self.word)):
+        for step in range(self.maxSteps):
             for pos in range(len(self.word)):
                 for char1 in range(len(self.alphabet)):
                     for char2 in range(char1+1, len(self.alphabet)):
@@ -208,7 +209,7 @@ class TMAcceptanceSAT():
 
     def _formulasNonHeadCharsNonModifiable(self):
         formulas = []
-        for step in range(len(self.word)-1):
+        for step in range(self.maxSteps - 1):
             for pos in range(len(self.word)):
                 for char in self.alphabet:
                     formulas += Implies(
@@ -228,7 +229,7 @@ class TMAcceptanceSAT():
         machine at step i+1
         """
         formulas = []
-        for step in range(len(self.word)-1):
+        for step in range(self.maxSteps - 1):
             for pos in range(len(self.word)):
                 for state in self.states:
                     for char in self.alphabet:
@@ -260,7 +261,7 @@ class TMAcceptanceSAT():
         For some point in time, the machine reaches the accepting state
         """
         formulas = []
-        for step in range(len(self.word)):
+        for step in range(self.maxSteps):
             formulas += X(step, self.acceptingState).bool(),
         return [Or(formulas)]
 
