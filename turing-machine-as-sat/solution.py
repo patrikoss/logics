@@ -144,11 +144,11 @@ class TMAcceptanceSAT():
         # format the output
         history = []
         for step in range(len(stateHistory)):
-            tapeContent = [c+'|' for (_,c) in tapeHistory[step]]
+            tapeContent = [c+'| ' for (_,c) in tapeHistory[step]]
             state = stateHistory[step]
             headPosition = headPositionHistory[step]
 
-            tapeContent[headPosition] += state
+            tapeContent[headPosition] = tapeContent[headPosition][:-1]+state
             tapeContent = ' '.join(tapeContent)
             history.append(tapeContent)
         return history
