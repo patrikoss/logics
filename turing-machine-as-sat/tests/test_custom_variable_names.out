@@ -1,0 +1,7 @@
+YES
+
+bob|q1 has|  a|  cat| 
+cat|  has|q2 a|  cat| 
+cat|  has|  a|q2 cat| 
+cat|  has|  a|  cat|q2
+cat|  has|  a|  bob|q3

@@ -1,0 +1,8 @@
+YES
+
+a|i a|  a|  a|  b| 
+a|  a|i a|  a|  b| 
+a|  a|  a|i a|  b| 
+a|  a|  a|  a|i b| 
+a|  a|  a|  a|  b|i
+a|  a|  a|  a|  b|f

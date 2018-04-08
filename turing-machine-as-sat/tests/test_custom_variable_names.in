@@ -1,0 +1,15 @@
+4 3 7
+has bob a cat
+q1 q2 q3
+q1
+q3
+bob q1 cat q2 1
+bob q1 cat q2 -1
+has q2 has q2 1
+has q2 has q1 -1
+has q1 has q1 1
+a q2 a q2 1
+cat q2 bob q3 0
+4
+bob has a cat
+
